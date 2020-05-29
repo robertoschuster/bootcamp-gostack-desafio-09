@@ -1,22 +1,25 @@
 import React, { useState, useEffect } from 'react';
 
 import { MdAdd, MdSearch } from 'react-icons/md';
-import { Container, Title, Header, List } from './styles';
+import { Container, Title, Header, DeliveriesTable } from './styles';
+import DeliveryStatus from './DeliveryStatus';
 import api from '~/services/api';
 
 function Deliveries() {
   const [filter, setFilter] = useState('');
   const [deliveries, setDeliveries] = useState([]);
 
+  async function loadDeliveries() {
+    const response = await api.get('deliveries', {
+      // params: {},
+    });
+
+    setDeliveries(response.data);
+  }
+
+  useEffect(() => {}, []);
+
   useEffect(() => {
-    async function loadDeliveries() {
-      const response = await api.get('deliveries', {
-        params: { q: filter },
-      });
-
-      setDeliveries(response.data);
-    }
-
     loadDeliveries();
   }, [filter]);
 
@@ -36,7 +39,7 @@ function Deliveries() {
           <span>Cadastrar</span>
         </button>
       </Header>
-      <List>
+      <DeliveriesTable>
         <thead>
           <tr>
             <th>Id</th>
@@ -50,18 +53,20 @@ function Deliveries() {
         </thead>
         <tbody>
           {deliveries.map((delivery) => (
-            <tr>
+            <tr key={delivery.id}>
               <td>{delivery.id}</td>
               <td>{delivery.recipient.name}</td>
               <td>{delivery.deliveryman.name}</td>
               <td>{delivery.recipient.city}</td>
               <td>{delivery.recipient.state}</td>
-              <td>Entregue</td>
+              <td>
+                <DeliveryStatus delivery={delivery} />
+              </td>
               <td>...</td>
             </tr>
           ))}
         </tbody>
-      </List>
+      </DeliveriesTable>
     </Container>
   );
 }

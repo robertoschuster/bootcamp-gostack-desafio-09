@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   /* background: lightcyan; */
-  /* max-width: 600px; */
   max-width: 80%;
   margin: 30px auto;
   display: flex;
@@ -75,11 +74,12 @@ export const Header = styled.header`
   }
 `;
 
-export const List = styled.table`
+export const DeliveriesTable = styled.table`
   /* background: lightyellow; */
   margin-top: 10px;
   border-collapse: separate;
-  border-spacing: 0 15px;
+  border-spacing: 0px 15px;
+  font-size: 14px;
 
   thead th {
     color: #333;
@@ -89,7 +89,7 @@ export const List = styled.table`
 
   tbody td {
     color: #666;
-    padding: 16px 10px;
+    padding: 14px 10px;
     vertical-align: middle;
     background: #fff;
   }
