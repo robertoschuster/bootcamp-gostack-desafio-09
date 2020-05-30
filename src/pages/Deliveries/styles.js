@@ -85,11 +85,6 @@ export const DeliveriesTable = styled.table`
     padding: 14px 10px;
     vertical-align: middle;
     background: #fff;
-
-    button {
-      background: none;
-      border: 0;
-    }
   }
 
   /* Alinha última coluna à direita */

@@ -3,12 +3,14 @@ import React, { useState, useEffect, useRef } from 'react';
 import { MdAdd, MdSearch } from 'react-icons/md';
 import { Container, Title, Header, DeliveriesTable } from './styles';
 import DeliveryStatus from './DeliveryStatus';
+import Actions from '~/components/Actions';
 import api from '~/services/api';
 
 function Deliveries() {
   const [filter, setFilter] = useState('');
   const [deliveries, setDeliveries] = useState([]);
   const time = useRef(null);
+  const [visibleActionId, setVisibleActionId] = useState(null);
 
   useEffect(() => {
     async function loadDeliveries() {
@@ -27,6 +29,10 @@ function Deliveries() {
 
   function handleChange(value) {
     setFilter(value);
+  }
+
+  function handleShowAction(id) {
+    setVisibleActionId(id);
   }
 
   return (
@@ -79,7 +85,11 @@ function Deliveries() {
                 <DeliveryStatus delivery={delivery} />
               </td>
               <td>
-                <button type="button">...</button>
+                <Actions
+                  id={delivery.id}
+                  onShowAction={handleShowAction}
+                  visibleActionId={visibleActionId}
+                />
               </td>
             </tr>
           ))}
