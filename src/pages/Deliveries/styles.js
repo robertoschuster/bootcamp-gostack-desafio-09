@@ -2,11 +2,11 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   /* background: lightcyan; */
-  max-width: 80%;
+  max-width: 990px;
   margin: 30px auto;
   display: flex;
   flex-direction: column;
-  height: 100%;
+  padding: 10px 30px;
 `;
 
 export const Title = styled.h1`
@@ -26,33 +26,26 @@ export const Header = styled.header`
   align-items: center;
 
   div {
+    /* padding: 10px; */
+    background: #fff;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
 
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 0 10px;
+
     input {
-      border: 1px solid #ccc;
-      outline: 0ch;
-      border-radius: 4px;
-      padding: 14px 5px;
-      width: 300px;
-      color: #666;
-    }
-
-    button {
-      background: #7d40e7;
       border: 0;
-      padding: 10px 10px;
-      border-radius: 4px;
-      color: #fff;
-      font-weight: bold;
-      margin-left: 5px;
+      outline: 0;
+      color: #666;
+      padding: 10px;
 
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
+      &::placeholder {
+        color: #ccc;
+      }
     }
   }
 
@@ -92,8 +85,14 @@ export const DeliveriesTable = styled.table`
     padding: 14px 10px;
     vertical-align: middle;
     background: #fff;
+
+    button {
+      background: none;
+      border: 0;
+    }
   }
 
+  /* Alinha última coluna à direita */
   tr th:last-child {
     text-align: right;
   }
@@ -101,6 +100,7 @@ export const DeliveriesTable = styled.table`
     text-align: right;
   }
 
+  /* Padding somente na primeira e última colunas */
   tr th:first-child {
     padding-left: 30px;
   }
