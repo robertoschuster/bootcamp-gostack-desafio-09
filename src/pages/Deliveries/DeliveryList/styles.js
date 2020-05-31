@@ -1,14 +1,5 @@
 import styled from 'styled-components';
 
-export const Container = styled.div`
-  /* background: lightcyan; */
-  max-width: 990px;
-  margin: 30px auto;
-  display: flex;
-  flex-direction: column;
-  padding: 10px 30px;
-`;
-
 export const Title = styled.h1`
   /* background: lightcoral; */
   font-size: 20px;

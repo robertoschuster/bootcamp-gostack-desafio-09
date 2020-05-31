@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 
 import { MdAdd, MdSearch } from 'react-icons/md';
-import { Container, Title, Header, DeliveriesTable } from './styles';
+import history from '~/services/history';
+import { BaseContainer } from '~/components/BaseContainer';
+import { Title, Header, DeliveriesTable } from './styles';
 import DeliveryStatus from './DeliveryStatus';
 import Actions from '~/components/Actions';
 import api from '~/services/api';
@@ -35,8 +37,12 @@ function Deliveries() {
     setVisibleActionId(id);
   }
 
+  function handleCreate() {
+    history.push('/deliveries/create');
+  }
+
   return (
-    <Container>
+    <BaseContainer>
       <Title>Gerenciando encomendas</Title>
 
       <Header>
@@ -51,7 +57,7 @@ function Deliveries() {
           />
         </div>
 
-        <button type="button">
+        <button type="button" onClick={handleCreate}>
           <span>
             <MdAdd size={24} color="#FFF" />
           </span>
@@ -95,7 +101,7 @@ function Deliveries() {
           ))}
         </tbody>
       </DeliveriesTable>
-    </Container>
+    </BaseContainer>
   );
 }
 
