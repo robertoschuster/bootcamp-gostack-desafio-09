@@ -7,11 +7,6 @@ export const FormWrapper = styled.div`
     border-radius: 4px;
   }
 
-  input:focus {
-    box-shadow: 0 0 3px #7d40e7;
-    border: 1px solid #7d40e7;
-  }
-
   label {
     padding: 5px 0;
     color: #666;
@@ -38,4 +33,9 @@ export const FieldWrapper = styled.div`
   /* padding: 5px; */
   margin: 5px;
   flex: ${(props) => (props.flex ? props.flex : '1')};
+
+  > input:focus {
+    box-shadow: 0 0 3px #7d40e7;
+    border: 1px solid #7d40e7;
+  }
 `;
