@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const BaseContainer = styled.div`
-  /* background: lightcyan; */
+  /* background: lightcoral; */
   max-width: 1000px;
   display: flex;
   flex-direction: column;
