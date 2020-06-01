@@ -3,8 +3,9 @@ import React, { useState, useEffect, useRef } from 'react';
 import { MdAdd } from 'react-icons/md';
 import history from '~/services/history';
 import { BaseContainer } from '~/components/BaseContainer';
+import { Table } from '~/components/Table';
 import { Title } from '~/components/Title';
-import { Header, DeliveriesTable } from './styles';
+import { Header } from './styles';
 import DeliveryStatus from './DeliveryStatus';
 import Actions from '~/components/Actions';
 import api from '~/services/api';
@@ -64,7 +65,7 @@ function Deliveries() {
         </Button>
       </Header>
 
-      <DeliveriesTable>
+      <Table>
         <thead>
           <tr>
             <th>Id</th>
@@ -99,7 +100,7 @@ function Deliveries() {
             </tr>
           ))}
         </tbody>
-      </DeliveriesTable>
+      </Table>
     </BaseContainer>
   );
 }
