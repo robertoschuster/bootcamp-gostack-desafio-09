@@ -3,12 +3,15 @@ import styled from 'styled-components';
 export const Container = styled.div`
   background: #fff;
   padding: 0 30px;
+  border-bottom: 1px solid #ddd;
 `;
 
 export const Content = styled.div`
+  /* background: lightsalmon; */
   height: 64px;
-  max-width: 900px;
+  max-width: 1600px;
   margin: 0 auto;
+  padding: 0 30px;
 
   display: flex;
   flex-direction: row;
@@ -20,6 +23,7 @@ export const Content = styled.div`
     align-items: center;
 
     img {
+      width: 200px;
       margin-right: 20px;
       padding-right: 20px;
       border-right: 1px solid #eee;
