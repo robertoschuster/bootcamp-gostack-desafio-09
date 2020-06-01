@@ -1,10 +1,9 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 
 import { MdRemoveRedEye, MdEdit, MdDeleteForever } from 'react-icons/md';
 import { Container, ActionsButton, ActionsList, Action } from './styles';
 
-function Actions({ id, onShowAction, visibleActionId }) {
+function Actions({ id, onShowAction, visibleActionId, show, onBlur }) {
   const [visible, setVisible] = useState(false);
 
   function handleToggleVisible() {
@@ -14,19 +13,27 @@ function Actions({ id, onShowAction, visibleActionId }) {
 
   return (
     <Container>
-      <ActionsButton onClick={handleToggleVisible}>...</ActionsButton>
+      <ActionsButton onClick={handleToggleVisible} onBlur={onBlur}>
+        ...
+      </ActionsButton>
       <ActionsList visible={visible && visibleActionId === id}>
         <Action>
-          <MdRemoveRedEye size={18} color="#fff" />
-          <Link to="/">Visualizar</Link>
+          <button type="button" onClick={show}>
+            <MdRemoveRedEye size={18} color="#fff" />
+            <span>Visualizar</span>
+          </button>
         </Action>
         <Action>
-          <MdEdit size={18} color="#fff" />
-          <Link to="/">Editar</Link>
+          <button type="button" onClick={show}>
+            <MdEdit size={18} color="#fff" />
+            <span>Editar</span>
+          </button>
         </Action>
         <Action>
-          <MdDeleteForever size={18} color="#fff" />
-          <Link to="/">Excluir</Link>
+          <button type="button" onClick={show}>
+            <MdDeleteForever size={18} color="#fff" />
+            <span>Excluir</span>
+          </button>
         </Action>
       </ActionsList>
     </Container>

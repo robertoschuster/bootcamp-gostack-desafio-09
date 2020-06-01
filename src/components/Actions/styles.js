@@ -1,5 +1,5 @@
-import styled, { css } from 'styled-components';
-import { lighten } from 'polished';
+import styled from 'styled-components';
+import { darken } from 'polished';
 
 export const Container = styled.div`
   /* background: lightgreen; */
@@ -25,9 +25,10 @@ export const ActionsList = styled.div`
   top: calc(100% + 20px);
   background: #7d40e7;
   border-radius: 4px;
-  padding: 15px 5px;
+  padding: 5px;
   display: ${(props) => (props.visible ? 'block' : 'none')};
   z-index: ${(props) => (props.visible ? '10' : 'auto')};
+
   &::before {
     content: '';
     position: absolute;
@@ -42,23 +43,39 @@ export const ActionsList = styled.div`
 `;
 
 export const Action = styled.div`
-  padding: 0 30px;
-  color: #fff;
+  /* background: lightpink; */
   display: flex;
-  flex-direction: row;
-  /* justify-content: center; */
-  align-items: center;
 
-  a {
-    margin-left: 6px;
-    text-decoration: none;
+  button {
+    display: flex;
+    flex-direction: row;
+    /* justify-content: center; */
+    align-items: center;
+
+    padding: 10px 34px;
+    font-size: 14px;
+    background: none;
+    border: 0;
     color: #fff;
+    flex: 1;
+
+    transition: background 0.2s;
+    &:hover {
+      background: ${darken(0.06, '#7d40e7')};
+    }
+    &:active {
+      background: ${darken(0.2, '#7d40e7')};
+    }
+
+    svg {
+      margin-right: 6px;
+    }
   }
 
-  /* Toda notificação seguida por uma notificação anterior (2ª, 3ª, etc) */
+  /* Toda action seguida por uma action anterior (2ª, 3ª, etc) */
   & + div {
-    margin-top: 15px;
-    padding-top: 15px;
-    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    /* margin-top: 15px; */
+    /* padding-top: 15px; */
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
   }
 `;
