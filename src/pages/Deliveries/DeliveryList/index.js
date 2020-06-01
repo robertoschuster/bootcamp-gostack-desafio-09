@@ -7,8 +7,12 @@ import { Table } from '~/components/Table';
 import { Title } from '~/components/Title';
 import { Header } from './styles';
 import DeliveryStatus from './DeliveryStatus';
+import DeliveryModal from './DeliveryModal';
 import Actions from '~/components/Actions';
 import api from '~/services/api';
+
+import Modal from '~/components/Modal';
+import useModal from '~/components/Modal/useModal';
 
 import { Button } from '~/components/Button';
 import SearchInput from '~/components/SearchInput';
@@ -18,6 +22,8 @@ function Deliveries() {
   const [deliveries, setDeliveries] = useState([]);
   const time = useRef(null);
   const [visibleActionId, setVisibleActionId] = useState(null);
+  const { isShowing, toggle } = useModal();
+  const [delivery, setDelivery] = useState(null);
 
   useEffect(() => {
     async function loadDeliveries() {
@@ -46,8 +52,20 @@ function Deliveries() {
     history.push('/deliveries/create');
   }
 
+  function showDelivery(id) {
+    const deliv = deliveries.find((d) => d.id === id);
+    if (deliv) {
+      setDelivery(deliv);
+      toggle();
+    }
+  }
+
   return (
     <BaseContainer>
+      <Modal isShowing={isShowing} hide={toggle}>
+        <DeliveryModal delivery={delivery} />
+      </Modal>
+
       <Title>Gerenciando encomendas</Title>
 
       <Header>
@@ -64,7 +82,6 @@ function Deliveries() {
           <span>Cadastrar</span>
         </Button>
       </Header>
-
       <Table>
         <thead>
           <tr>
@@ -79,22 +96,24 @@ function Deliveries() {
           </tr>
         </thead>
         <tbody>
-          {deliveries.map((delivery) => (
-            <tr key={delivery.id}>
-              <td>{delivery.id}</td>
-              <td>{delivery.recipient.name}</td>
-              <td>{delivery.product}</td>
-              <td>{delivery.deliveryman.name}</td>
-              <td>{delivery.recipient.city}</td>
-              <td>{delivery.recipient.state}</td>
+          {deliveries.map((d) => (
+            <tr key={d.id}>
+              <td>{d.id}</td>
+              <td>{d.recipient.name}</td>
+              <td>{d.product}</td>
+              <td>{d.deliveryman.name}</td>
+              <td>{d.recipient.city}</td>
+              <td>{d.recipient.state}</td>
               <td>
-                <DeliveryStatus delivery={delivery} />
+                <DeliveryStatus delivery={d} />
               </td>
               <td>
                 <Actions
-                  id={delivery.id}
+                  id={d.id}
                   onShowAction={handleShowAction}
                   visibleActionId={visibleActionId}
+                  onClick={() => showDelivery(d.id)}
+                  onBlur={() => setVisibleActionId(null)}
                 />
               </td>
             </tr>
