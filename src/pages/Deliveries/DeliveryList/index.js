@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 
 import { MdAdd } from 'react-icons/md';
+import { toast } from 'react-toastify';
 import history from '~/services/history';
 import { BaseContainer } from '~/components/BaseContainer';
 import { Table } from '~/components/Table';
@@ -60,6 +61,27 @@ function Deliveries() {
     }
   }
 
+  async function deleteDelivery(id) {
+    try {
+      // Delete on backand
+      await api.delete(`deliveries/${id}`);
+
+      // Update status on state
+      const newDeliveries = deliveries.map((d) => {
+        if (d.id === id) {
+          d.cancel_date = new Date();
+        }
+        return d;
+      });
+
+      setDeliveries(newDeliveries);
+
+      return toast.success('Encomenda excluída com sucesso!');
+    } catch (error) {
+      return toast.error('Falha ao excluir encomenda!.');
+    }
+  }
+
   return (
     <BaseContainer>
       <Modal isShowing={isShowing} hide={toggle}>
@@ -112,8 +134,9 @@ function Deliveries() {
                   id={d.id}
                   onShowAction={handleShowAction}
                   visibleActionId={visibleActionId}
-                  onClick={() => showDelivery(d.id)}
                   onBlur={() => setVisibleActionId(null)}
+                  onClickShow={() => showDelivery(d.id)}
+                  onClickDelete={() => deleteDelivery(d.id)}
                 />
               </td>
             </tr>

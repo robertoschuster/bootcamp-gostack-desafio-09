@@ -5,7 +5,7 @@ import { Container } from './styles';
 
 function DeliveryStatus({ delivery }) {
   function getStatus() {
-    if (delivery.canceled_at) {
+    if (delivery.cancel_date) {
       return 'CANCELADA';
     }
     if (delivery.end_date) {
