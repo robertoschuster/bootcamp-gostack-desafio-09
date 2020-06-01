@@ -1,9 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { Container } from './styles';
 
 function DeliveryStatus({ delivery }) {
-  function getStatus(delivery) {
+  function getStatus() {
     if (delivery.canceled_at) {
       return 'CANCELADA';
     }
@@ -17,7 +18,7 @@ function DeliveryStatus({ delivery }) {
     return 'PENDENTE';
   }
 
-  const status = getStatus(delivery);
+  const status = getStatus();
 
   return (
     <Container status={status}>
@@ -26,5 +27,9 @@ function DeliveryStatus({ delivery }) {
     </Container>
   );
 }
+
+DeliveryStatus.propTypes = {
+  delivery: PropTypes.shape().isRequired,
+};
 
 export default DeliveryStatus;

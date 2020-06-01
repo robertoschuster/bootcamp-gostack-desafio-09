@@ -91,9 +91,9 @@ function DeliveryForm() {
 
       await api.post('deliveries', delivery);
       toast.success('Cadastro realizado com sucesso!');
-      history.push('/deliveries');
+      return history.push('/deliveries');
     } catch (error) {
-      toast.error('Falha ao salvar!.');
+      return toast.error('Falha ao salvar!.');
     }
   }
 
