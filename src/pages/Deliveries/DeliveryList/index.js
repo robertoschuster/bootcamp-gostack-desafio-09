@@ -1,12 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-import { MdAdd, MdSearch } from 'react-icons/md';
+import { MdAdd } from 'react-icons/md';
 import history from '~/services/history';
 import { BaseContainer } from '~/components/BaseContainer';
-import { Title, Header, DeliveriesTable } from './styles';
+import { Title } from '~/components/Title';
+import { Header, DeliveriesTable } from './styles';
 import DeliveryStatus from './DeliveryStatus';
 import Actions from '~/components/Actions';
 import api from '~/services/api';
+
+import { Button } from '~/components/Button';
+import SearchInput from '~/components/SearchInput';
 
 function Deliveries() {
   const [filter, setFilter] = useState('');
@@ -46,23 +50,18 @@ function Deliveries() {
       <Title>Gerenciando encomendas</Title>
 
       <Header>
-        <div>
-          <MdSearch size={24} color="#ccc" />
-          <input
-            type="text"
-            id="filtro"
-            placeholder="Buscar por encomendas"
-            value={filter}
-            onChange={(e) => handleChange(e.target.value)}
-          />
-        </div>
+        <SearchInput
+          placeholder="Buscar por encomendas"
+          value={filter}
+          onChange={(e) => handleChange(e.target.value)}
+        />
 
-        <button type="button" onClick={handleCreate}>
+        <Button primary type="button" onClick={handleCreate}>
           <span>
             <MdAdd size={24} color="#FFF" />
           </span>
           <span>Cadastrar</span>
-        </button>
+        </Button>
       </Header>
 
       <DeliveriesTable>

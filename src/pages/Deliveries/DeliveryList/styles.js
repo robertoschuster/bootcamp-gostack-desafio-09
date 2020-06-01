@@ -16,30 +16,6 @@ export const Header = styled.header`
   justify-content: space-between;
   align-items: center;
 
-  div {
-    /* padding: 10px; */
-    background: #fff;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    padding: 0 10px;
-
-    input {
-      border: 0;
-      outline: 0;
-      color: #666;
-      padding: 10px;
-
-      &::placeholder {
-        color: #ccc;
-      }
-    }
-  }
-
   button {
     background: #7d40e7;
     border: 0;
@@ -65,7 +41,7 @@ export const DeliveriesTable = styled.table`
   border-spacing: 0px 15px;
   font-size: 14px;
 
-  thead th {
+  th {
     color: #333;
     text-align: left;
     padding: 16px 10px;
