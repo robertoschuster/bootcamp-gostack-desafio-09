@@ -61,6 +61,16 @@ function Deliveries() {
     }
   }
 
+  function editDelivery(id) {
+    const deliv = deliveries.find((d) => d.id === id);
+    if (deliv) {
+      history.push({
+        pathname: '/deliveries/create',
+        delivery: deliv,
+      });
+    }
+  }
+
   async function deleteDelivery(id) {
     try {
       // Delete on backand
@@ -136,6 +146,7 @@ function Deliveries() {
                   visibleActionId={visibleActionId}
                   onBlur={() => setVisibleActionId(null)}
                   onClickShow={() => showDelivery(d.id)}
+                  onClickEdit={() => editDelivery(d.id)}
                   onClickDelete={() => deleteDelivery(d.id)}
                 />
               </td>

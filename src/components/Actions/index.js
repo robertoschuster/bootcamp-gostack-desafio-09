@@ -9,6 +9,7 @@ function Actions({
   onShowAction,
   visibleActionId,
   onClickShow,
+  onClickEdit,
   onClickDelete,
 }) {
   const [visible, setVisible] = useState(false);
@@ -29,7 +30,7 @@ function Actions({
           </button>
         </Action>
         <Action>
-          <button type="button">
+          <button type="button" onClick={onClickEdit}>
             <MdEdit size={18} color="#fff" />
             <span>Editar</span>
           </button>
@@ -51,6 +52,8 @@ Actions.propTypes = {
   onShowAction: PropTypes.oneOfType([PropTypes.element, PropTypes.func])
     .isRequired,
   onClickShow: PropTypes.oneOfType([PropTypes.element, PropTypes.func])
+    .isRequired,
+  onClickEdit: PropTypes.oneOfType([PropTypes.element, PropTypes.func])
     .isRequired,
   onClickDelete: PropTypes.oneOfType([PropTypes.element, PropTypes.func])
     .isRequired,

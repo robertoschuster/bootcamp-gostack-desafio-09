@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import AsyncSelect from 'react-select/async';
+import PropTypes from 'prop-types';
+
 import { Form, Input } from '@rocketseat/unform';
 import { MdDone, MdArrowBack } from 'react-icons/md';
 import { toast } from 'react-toastify';
@@ -14,10 +16,18 @@ import { Button } from '~/components/Button';
 import { Title } from '~/components/Title';
 import { FormWrapper, FieldRowWrapper, FieldWrapper } from './styles';
 
-function DeliveryForm() {
-  const [recipientId, setRecipientId] = useState(null);
-  const [deliverymanId, setDeliverymanId] = useState(null);
+function DeliveryForm({ location }) {
+  const [delivery] = useState(location.delivery);
+  const [selectedRecipient, setSelectedRecipient] = useState(
+    delivery && delivery.recipient
+  );
+  const [selectedDeliveryman, setSelectedDeliveryman] = useState(
+    delivery && delivery.deliveryman
+  );
 
+  /**
+   * Async Select
+   */
   async function loadRecipients(filter) {
     const response = await api.get('recipients', {
       params: { q: filter },
@@ -55,19 +65,28 @@ function DeliveryForm() {
   };
 
   function handleChangeRecipient(selectedOptions) {
-    setRecipientId(selectedOptions.value);
+    setSelectedRecipient({
+      id: selectedOptions.value,
+      name: selectedOptions.label,
+    });
   }
 
   function handleChangeDeliveryman(selectedOptions) {
-    setDeliverymanId(selectedOptions.value);
+    setSelectedDeliveryman({
+      id: selectedOptions.value,
+      name: selectedOptions.label,
+    });
   }
 
+  /**
+   * Form
+   */
   function handleClickBack() {
     history.goBack();
   }
 
   async function save(recipient_id, deliveryman_id, product) {
-    const delivery = {
+    const payload = {
       recipient_id,
       deliveryman_id,
       product,
@@ -84,12 +103,17 @@ function DeliveryForm() {
         product: Yup.string().required('Por favor, informe o produto.'),
       });
       try {
-        await schema.validate(delivery, { abortEarly: false });
+        await schema.validate(payload, { abortEarly: false });
       } catch (err) {
         return toast.error(err.errors[0]);
       }
 
-      await api.post('deliveries', delivery);
+      if (delivery) {
+        await api.put(`deliveries/${delivery.id}`, payload); // Edit
+      } else {
+        await api.post('deliveries', payload); // Create
+      }
+
       toast.success('Cadastro realizado com sucesso!');
       return history.push('/deliveries');
     } catch (error) {
@@ -98,13 +122,15 @@ function DeliveryForm() {
   }
 
   function handleSubmit({ product }) {
-    save(recipientId, deliverymanId, product);
+    save(delivery, selectedRecipient.id, selectedDeliveryman.id, product);
   }
 
   return (
     <BaseContainer>
       <FormWrapper>
-        <Form onSubmit={handleSubmit}>
+        <Form
+          onSubmit={handleSubmit}
+          initialData={{ product: delivery && delivery.product }}>
           <FormHeader>
             <Title>Cadastro de Encomendas</Title>
             <div>
@@ -123,22 +149,36 @@ function DeliveryForm() {
             <FieldWrapper flex={1}>
               <label htmlFor="recipients">Destinatário:</label>
               <AsyncSelect
+                autoFocus
                 name="recipients"
+                placeholder="Selecione um destinatário..."
                 cacheOptions
                 loadOptions={loadRecipientOptions}
                 defaultOptions
                 onChange={handleChangeRecipient}
-                className="combo"
+                defaultValue={
+                  delivery && {
+                    value: delivery.recipient.id,
+                    label: delivery.recipient.name,
+                  }
+                }
               />
             </FieldWrapper>
             <FieldWrapper flex={1}>
               <label htmlFor="deliveryman">Entregador:</label>
               <AsyncSelect
                 name="deliveryman"
+                placeholder="Selecione um entregador..."
                 cacheOptions
                 loadOptions={loadDeliverymanOptions}
                 defaultOptions
                 onChange={handleChangeDeliveryman}
+                defaultValue={
+                  delivery && {
+                    value: delivery.deliveryman.id,
+                    label: delivery.deliveryman.name,
+                  }
+                }
               />
             </FieldWrapper>
           </FieldRowWrapper>
@@ -153,5 +193,13 @@ function DeliveryForm() {
     </BaseContainer>
   );
 }
+
+DeliveryForm.propTypes = {
+  location: PropTypes.shape(),
+};
+
+DeliveryForm.defaultProps = {
+  location: null,
+};
 
 export default DeliveryForm;
