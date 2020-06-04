@@ -12,6 +12,7 @@ import DeliveryModal from './DeliveryModal';
 import Actions from '~/components/Actions';
 import api from '~/services/api';
 
+import Pagination from '~/components/Pagination';
 import Modal from '~/components/Modal';
 import useModal from '~/components/Modal/useModal';
 
@@ -25,21 +26,24 @@ function Deliveries() {
   const [visibleActionId, setVisibleActionId] = useState(null);
   const { isShowing, toggle } = useModal();
   const [delivery, setDelivery] = useState(null);
+  const [totalPages, setTotalPages] = useState(1);
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
-    async function loadDeliveries() {
+    async function loadDeliveries(f) {
       const response = await api.get('deliveries', {
-        params: { q: filter },
+        params: { q: f, page },
       });
 
+      setTotalPages(Number(response.headers['x-api-totalpages']));
       setDeliveries(response.data);
     }
 
     clearTimeout(time.current);
     time.current = setTimeout(() => {
-      loadDeliveries();
+      loadDeliveries(filter);
     }, 600);
-  }, [filter]);
+  }, [filter, page]);
 
   function handleChange(value) {
     setFilter(value);
@@ -154,6 +158,7 @@ function Deliveries() {
           ))}
         </tbody>
       </Table>
+      <Pagination totalPages={totalPages} page={page} setPage={setPage} />
     </BaseContainer>
   );
 }
