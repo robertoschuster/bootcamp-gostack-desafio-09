@@ -19,7 +19,10 @@ export default function Pagination({ totalPages, page, setPage }) {
           type="button"
           disabled={page < 2}
           onClick={() => handlePage('back')}>
-          <MdChevronLeft size={36} color={colors.primary} />
+          <MdChevronLeft
+            size={36}
+            color={page < 2 ? colors.neutral : colors.primary}
+          />
         </button>
         <span>
           Página {page} de {totalPages}
@@ -28,7 +31,10 @@ export default function Pagination({ totalPages, page, setPage }) {
           type="button"
           disabled={page === totalPages}
           onClick={() => handlePage('next')}>
-          <MdChevronRight size={36} color={colors.primary} />
+          <MdChevronRight
+            size={36}
+            color={page === totalPages ? colors.neutral : colors.primary}
+          />
         </button>
       </div>
     </Container>
