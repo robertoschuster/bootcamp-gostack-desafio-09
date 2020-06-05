@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { darken } from 'polished';
+import colors from '~/styles/colors';
 
 export const Container = styled.div`
   /* background: lightgreen; */
@@ -15,7 +16,7 @@ export const ActionsButton = styled.button`
   background: none;
   font-size: 18px;
   font-weight: bold;
-  color: #999;
+  color: ${colors.textDark};
 `;
 
 export const ActionsList = styled.div`
@@ -23,7 +24,7 @@ export const ActionsList = styled.div`
   width: 160px;
   left: calc(50% - 80px); /** sempre centralizado no badge */
   top: calc(100% + 20px);
-  background: #7d40e7;
+  background: ${colors.primary};
   border-radius: 4px;
   padding: 5px;
   display: ${(props) => (props.visible ? 'block' : 'none')};
@@ -38,7 +39,7 @@ export const ActionsList = styled.div`
     height: 0;
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
-    border-bottom: 10px solid #7d40e7;
+    border-bottom: 10px solid ${colors.primary};
   }
 `;
 
@@ -56,15 +57,15 @@ export const Action = styled.div`
     font-size: 14px;
     background: none;
     border: 0;
-    color: #fff;
+    color: ${colors.textLight};
     flex: 1;
 
     transition: background 0.2s;
     &:hover {
-      background: ${darken(0.06, '#7d40e7')};
+      background: ${darken(0.06, colors.primary)};
     }
     &:active {
-      background: ${darken(0.2, '#7d40e7')};
+      background: ${darken(0.2, colors.primary)};
     }
 
     svg {

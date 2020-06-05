@@ -2,6 +2,7 @@ import React from 'react';
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
 import PropTypes from 'prop-types';
 
+import colors from '~/styles/colors';
 import { Container } from './styles';
 
 export default function Pagination({ totalPages, page, setPage }) {
@@ -18,7 +19,7 @@ export default function Pagination({ totalPages, page, setPage }) {
           type="button"
           disabled={page < 2}
           onClick={() => handlePage('back')}>
-          <MdChevronLeft size={36} color="#7159c1" />
+          <MdChevronLeft size={36} color={colors.primary} />
         </button>
         <span>
           Página {page} de {totalPages}
@@ -27,7 +28,7 @@ export default function Pagination({ totalPages, page, setPage }) {
           type="button"
           disabled={page === totalPages}
           onClick={() => handlePage('next')}>
-          <MdChevronRight size={36} color="#7159c1" />
+          <MdChevronRight size={36} color={colors.primary} />
         </button>
       </div>
     </Container>

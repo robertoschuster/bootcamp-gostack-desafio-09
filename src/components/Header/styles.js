@@ -1,9 +1,10 @@
 import styled from 'styled-components';
+import colors from '~/styles/colors';
 
 export const Container = styled.div`
-  background: #fff;
+  background: ${colors.panelBackground};
   padding: 0 30px;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid ${colors.panelBorder};
 `;
 
 export const Content = styled.div`
@@ -26,12 +27,12 @@ export const Content = styled.div`
       width: 200px;
       margin-right: 20px;
       padding-right: 20px;
-      border-right: 1px solid #eee;
+      border-right: 1px solid ${colors.panelBorder};
     }
 
     a {
       font-weight: bold;
-      color: #7159c1;
+      color: ${colors.primary};
     }
   }
 
@@ -46,7 +47,7 @@ export const Profile = styled.div`
   align-items: center;
   margin-left: 20px;
   padding-left: 20px;
-  border-left: 1px solid #eee;
+  border-left: 1px solid ${colors.panelBorder};
 
   div {
     text-align: right;
@@ -54,7 +55,7 @@ export const Profile = styled.div`
 
     strong {
       display: block;
-      color: #333;
+      color: ${colors.textDarker};
     }
 
     a {
@@ -62,7 +63,7 @@ export const Profile = styled.div`
       display: block;
       margin-top: 2px;
       font-size: 12px;
-      color: #999;
+      color: ${colors.textDark};
     }
   }
 

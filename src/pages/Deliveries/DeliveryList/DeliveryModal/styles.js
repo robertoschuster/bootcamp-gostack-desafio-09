@@ -1,14 +1,15 @@
 import styled from 'styled-components';
+import colors from '~/styles/colors';
 
 export const Container = styled.div`
   padding: 10px;
-  color: #666;
+  color: ${colors.textDark};
   line-height: 1.8;
   font-size: 13px;
   min-width: 400px;
 
   strong {
-    color: #333;
+    color: ${colors.textDark};
     font-size: 12px;
     font-weight: bold;
   }
@@ -16,7 +17,7 @@ export const Container = styled.div`
   hr {
     margin-top: 10px;
     margin-bottom: 10px;
-    border: 1px solid #eee;
+    border: 1px solid ${colors.inputBorder};
     outline: 0;
   }
 

@@ -67,9 +67,4 @@ export const Container = styled.div`
     padding: 0.3rem 1rem;
     margin-left: 0.5rem;
   }
-
-  .button-default {
-    background: #247ba0;
-    color: #fff;
-  }
 `;

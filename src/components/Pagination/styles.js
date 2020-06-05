@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import colors from '~/styles/colors';
 
 export const Container = styled.div`
   /* background: lightcoral; */
@@ -18,6 +19,7 @@ export const Container = styled.div`
 
     span {
       padding: 0 10px;
+      color: ${colors.textDarker};
     }
 
     button {

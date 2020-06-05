@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import colors from '~/styles/colors';
 
 export const Table = styled.table`
   /* background: lightyellow; */
@@ -8,16 +9,16 @@ export const Table = styled.table`
   font-size: 14px;
 
   th {
-    color: #333;
+    color: ${colors.textDarker};
     text-align: left;
     padding: 16px 10px;
   }
 
   tbody td {
-    color: #666;
+    color: ${colors.textDark};
     padding: 14px 10px;
     vertical-align: middle;
-    background: #fff;
+    background: ${colors.panelBackground};
   }
 
   /* Alinha última coluna à direita */

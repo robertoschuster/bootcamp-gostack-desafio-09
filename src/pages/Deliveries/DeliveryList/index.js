@@ -1,21 +1,22 @@
 import React, { useState, useEffect, useRef } from 'react';
-
 import { MdAdd } from 'react-icons/md';
 import { toast } from 'react-toastify';
+
+import api from '~/services/api';
 import history from '~/services/history';
+import colors from '~/styles/colors';
+
 import { BaseContainer } from '~/components/BaseContainer';
 import { Table } from '~/components/Table';
 import { Title } from '~/components/Title';
 import { Header } from './styles';
+
 import DeliveryStatus from './DeliveryStatus';
 import DeliveryModal from './DeliveryModal';
 import Actions from '~/components/Actions';
-import api from '~/services/api';
-
 import Pagination from '~/components/Pagination';
 import Modal from '~/components/Modal';
 import useModal from '~/components/Modal/useModal';
-
 import { Button } from '~/components/Button';
 import SearchInput from '~/components/SearchInput';
 
@@ -113,7 +114,7 @@ function Deliveries() {
 
         <Button primary type="button" onClick={handleCreate}>
           <span>
-            <MdAdd size={24} color="#FFF" />
+            <MdAdd size={24} color={colors.iconLight} />
           </span>
           <span>Cadastrar</span>
         </Button>

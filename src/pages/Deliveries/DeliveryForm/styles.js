@@ -1,19 +1,23 @@
 import styled from 'styled-components';
+import colors from '~/styles/colors';
 
 export const FormWrapper = styled.div`
+  border: 1px solid ${colors.panelBorder};
+  border-radius: 4px;
+
   input {
-    border: 1px solid #ccc;
+    border: 1px solid ${colors.inputBorder};
     padding: 10px;
     border-radius: 4px;
   }
 
   label {
     padding: 5px 0;
-    color: #666;
+    color: ${colors.textDark};
   }
 
   form {
-    background: #fff;
+    background: ${colors.panelBackground};
     border-radius: 4px;
     padding: 10px;
   }
@@ -35,7 +39,7 @@ export const FieldWrapper = styled.div`
   flex: ${(props) => (props.flex ? props.flex : '1')};
 
   > input:focus {
-    box-shadow: 0 0 3px #7d40e7;
-    border: 1px solid #7d40e7;
+    box-shadow: 0 0 3px ${colors.primary};
+    border: 1px solid ${colors.primary};
   }
 `;

@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import AsyncSelect from 'react-select/async';
 import PropTypes from 'prop-types';
-
+import * as Yup from 'yup';
 import { Form, Input } from '@rocketseat/unform';
 import { MdDone, MdArrowBack } from 'react-icons/md';
 import { toast } from 'react-toastify';
 
-import * as Yup from 'yup';
 import api from '~/services/api';
 import history from '~/services/history';
+import colors from '~/styles/colors';
 
 import { BaseContainer } from '~/components/BaseContainer';
 import { FormHeader } from '~/components/FormHeader';
@@ -135,11 +135,11 @@ function DeliveryForm({ location }) {
             <Title>Cadastro de Encomendas</Title>
             <div>
               <Button type="button" onClick={handleClickBack}>
-                <MdArrowBack size={24} color="#FFF" />
+                <MdArrowBack size={24} color={colors.iconLight} />
                 <span>Voltar</span>
               </Button>
               <Button primary type="submit">
-                <MdDone size={24} color="#FFF" />
+                <MdDone size={24} color={colors.iconLight} />
                 <span>Salvar</span>
               </Button>
             </div>

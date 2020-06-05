@@ -1,12 +1,13 @@
 import styled from 'styled-components';
 import { darken } from 'polished';
+import colors from '~/styles/colors';
 
 export const Button = styled.button`
-  background: ${(props) => (props.primary ? '#7d40e7' : '#999')};
+  background: ${(props) => (props.primary ? colors.primary : colors.neutral)};
   border: 0;
   padding: 10px 30px;
   border-radius: 4px;
-  color: #fff;
+  color: ${colors.textLight};
   font-weight: bold;
   margin-left: 10px;
 
@@ -22,10 +23,14 @@ export const Button = styled.button`
   transition: background 0.2s;
   &:hover {
     background: ${(props) =>
-      props.primary ? darken(0.06, '#7d40e7') : darken(0.06, '#999')};
+      props.primary
+        ? darken(0.06, colors.primary)
+        : darken(0.06, colors.neutral)};
   }
   &:active {
     background: ${(props) =>
-      props.primary ? darken(0.2, '#7d40e7') : darken(0.2, '#999')};
+      props.primary
+        ? darken(0.2, colors.primary)
+        : darken(0.2, colors.neutral)};
   }
 `;

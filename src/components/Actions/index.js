@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-
 import { MdRemoveRedEye, MdEdit, MdDeleteForever } from 'react-icons/md';
+
+import colors from '~/styles/colors';
 import { Container, ActionsButton, ActionsList, Action } from './styles';
 
 function Actions({
@@ -25,19 +26,19 @@ function Actions({
       <ActionsList visible={visible && visibleActionId === id}>
         <Action>
           <button type="button" onClick={onClickShow}>
-            <MdRemoveRedEye size={18} color="#fff" />
+            <MdRemoveRedEye size={18} color={colors.iconLight} />
             <span>Visualizar</span>
           </button>
         </Action>
         <Action>
           <button type="button" onClick={onClickEdit}>
-            <MdEdit size={18} color="#fff" />
+            <MdEdit size={18} color={colors.iconLight} />
             <span>Editar</span>
           </button>
         </Action>
         <Action>
           <button type="button" onClick={onClickDelete}>
-            <MdDeleteForever size={18} color="#fff" />
+            <MdDeleteForever size={18} color={colors.iconLight} />
             <span>Excluir</span>
           </button>
         </Action>
