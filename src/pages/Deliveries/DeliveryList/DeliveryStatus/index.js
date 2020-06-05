@@ -1,29 +1,30 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import status from './status';
 
 import { Container } from './styles';
 
 function DeliveryStatus({ delivery }) {
   function getStatus() {
-    if (delivery.cancel_date) {
-      return 'CANCELADA';
+    if (delivery.canceled_at) {
+      return status.cancelada;
     }
     if (delivery.end_date) {
-      return 'ENTREGUE';
+      return status.entregue;
     }
     if (delivery.start_date) {
-      return 'RETIRADA';
+      return status.retirada;
     }
 
-    return 'PENDENTE';
+    return status.pendente;
   }
 
-  const status = getStatus();
+  const deliveryStatus = getStatus();
 
   return (
-    <Container status={status}>
+    <Container status={deliveryStatus}>
       <span />
-      {status}
+      {deliveryStatus}
     </Container>
   );
 }

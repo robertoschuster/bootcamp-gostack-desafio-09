@@ -1,15 +1,16 @@
 import styled from 'styled-components';
+import status from './status';
 
 export const Container = styled.div`
   background: ${(props) => {
     switch (props.status) {
-      case 'ENTREGUE':
+      case status.entregue:
         return '#DFF0DF';
-      case 'PENDENTE':
+      case status.pendente:
         return '#F0F0DF';
-      case 'CANCELADA':
+      case status.cancelada:
         return '#FAB0B0';
-      case 'RETIRADA':
+      case status.retirada:
         return '#BAD2FF';
       default:
         break;
@@ -18,13 +19,13 @@ export const Container = styled.div`
 
   color: ${(props) => {
     switch (props.status) {
-      case 'ENTREGUE':
+      case status.entregue:
         return '#2CA42B';
-      case 'PENDENTE':
+      case status.pendente:
         return '#C1BC35';
-      case 'CANCELADA':
+      case status.cancelada:
         return '#DE3B3B';
-      case 'RETIRADA':
+      case status.retirada:
         return '#4D85EE';
       default:
         break;
@@ -46,13 +47,13 @@ export const Container = styled.div`
 
     background: ${(props) => {
       switch (props.status) {
-        case 'ENTREGUE':
+        case status.entregue:
           return '#2CA42B';
-        case 'PENDENTE':
+        case status.pendente:
           return '#C1BC35';
-        case 'CANCELADA':
+        case status.cancelada:
           return '#DE3B3B';
-        case 'RETIRADA':
+        case status.retirada:
           return '#4D85EE';
         default:
           break;
