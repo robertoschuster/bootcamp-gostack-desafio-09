@@ -85,10 +85,10 @@ function DeliveryForm({ location }) {
     history.goBack();
   }
 
-  async function save(recipient_id, deliveryman_id, product) {
+  async function save(recipient, deliveryman, product) {
     const payload = {
-      recipient_id,
-      deliveryman_id,
+      recipient_id: recipient && recipient.id,
+      deliveryman_id: deliveryman && deliveryman.id,
       product,
     };
 
@@ -122,7 +122,7 @@ function DeliveryForm({ location }) {
   }
 
   function handleSubmit({ product }) {
-    save(delivery, selectedRecipient.id, selectedDeliveryman.id, product);
+    save(selectedRecipient, selectedDeliveryman, product);
   }
 
   return (

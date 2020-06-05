@@ -77,6 +77,10 @@ function Deliveries() {
   }
 
   async function deleteDelivery(id) {
+    if (!window.confirm('Deseja mesmo excluir?')) {
+      return;
+    }
+
     try {
       // Delete on backand
       await api.delete(`deliveries/${id}`);
@@ -84,16 +88,16 @@ function Deliveries() {
       // Update status on state
       const newDeliveries = deliveries.map((d) => {
         if (d.id === id) {
-          d.cancel_date = new Date();
+          d.canceled_at = new Date();
         }
         return d;
       });
 
       setDeliveries(newDeliveries);
 
-      return toast.success('Encomenda excluída com sucesso!');
+      toast.success('Encomenda excluída com sucesso!');
     } catch (error) {
-      return toast.error('Falha ao excluir encomenda!.');
+      toast.error('Falha ao excluir encomenda!.');
     }
   }
 

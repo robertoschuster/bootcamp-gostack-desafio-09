@@ -40,7 +40,8 @@ function DeliveryModal({ delivery }) {
 }
 
 DeliveryModal.propTypes = {
-  delivery: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+  // delivery: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+  delivery: PropTypes.shape(),
 };
 
 DeliveryModal.defaultProps = { delivery: null };
