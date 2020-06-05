@@ -4,7 +4,6 @@ import 'react-perfect-scrollbar/dist/css/styles.css';
 import 'react-toastify/dist/ReactToastify.css';
 
 export default createGlobalStyle`
-  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
   * {
     margin: 0;
@@ -26,7 +25,8 @@ export default createGlobalStyle`
   }
 
   body, input, button {
-    font: 14px 'Roboto', sans-serif;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
   }
 
   a {
