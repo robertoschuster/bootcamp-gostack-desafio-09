@@ -3,7 +3,7 @@ import colors from '~/styles/colors';
 
 export const Container = styled.div`
   background: ${colors.panelBackground};
-  padding: 0 30px;
+  /* padding: 0 30px; */
   border-bottom: 1px solid ${colors.panelBorder};
 `;
 
@@ -17,7 +17,7 @@ export const HeaderLink = styled.div`
 
 export const Content = styled.div`
   height: 64px;
-  max-width: 1600px;
+  max-width: 85%;
   margin: 0 auto;
   padding: 0 30px;
 
