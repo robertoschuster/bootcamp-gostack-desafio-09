@@ -28,3 +28,15 @@ export const Header = styled.header`
     }
   }
 `;
+
+export const AvatarWrapper = styled.div`
+  /* background: lightcoral; */
+  display: flex;
+  flex-direction: row;
+  /* justify-content: center; */
+  align-items: center;
+
+  > div {
+    margin-right: 8px;
+  }
+`;

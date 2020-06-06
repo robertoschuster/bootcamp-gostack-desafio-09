@@ -9,8 +9,9 @@ import colors from '~/styles/colors';
 import { BaseContainer } from '~/components/BaseContainer';
 import { Table } from '~/components/Table';
 import { Title } from '~/components/Title';
-import { Header } from './styles';
+import { Header, AvatarWrapper } from './styles';
 
+import Avatar from '~/components/Avatar';
 import DeliveryStatus from './DeliveryStatus';
 import DeliveryModal from './DeliveryModal';
 import Actions from '~/components/Actions';
@@ -23,10 +24,10 @@ import SearchInput from '~/components/SearchInput';
 function Deliveries() {
   const [filter, setFilter] = useState('');
   const [deliveries, setDeliveries] = useState([]);
-  const time = useRef(null);
-  const [visibleActionId, setVisibleActionId] = useState(null);
-  const { isShowing, toggle } = useModal();
   const [delivery, setDelivery] = useState(null);
+  const time = useRef(null);
+  // const [visibleActionId, setVisibleActionId] = useState(null);
+  const { isShowing, toggle } = useModal();
   const [totalPages, setTotalPages] = useState(1);
   const [page, setPage] = useState(1);
 
@@ -46,19 +47,15 @@ function Deliveries() {
     }, 600);
   }, [filter, page]);
 
-  function handleChange(value) {
+  function handleFilterChange(value) {
     setFilter(value);
-  }
-
-  function handleShowAction(id) {
-    setVisibleActionId(id);
   }
 
   function handleCreate() {
     history.push('/deliveries/create');
   }
 
-  function showDelivery(id) {
+  function handleShow(id) {
     const deliv = deliveries.find((d) => d.id === id);
     if (deliv) {
       setDelivery(deliv);
@@ -66,7 +63,7 @@ function Deliveries() {
     }
   }
 
-  function editDelivery(id) {
+  function handleEdit(id) {
     const deliv = deliveries.find((d) => d.id === id);
     if (deliv) {
       history.push({
@@ -76,7 +73,7 @@ function Deliveries() {
     }
   }
 
-  async function deleteDelivery(id) {
+  async function handleDelete(id) {
     if (!window.confirm('Deseja mesmo excluir?')) {
       return;
     }
@@ -113,7 +110,7 @@ function Deliveries() {
         <SearchInput
           placeholder="Buscar por encomendas"
           value={filter}
-          onChange={(e) => handleChange(e.target.value)}
+          onChange={(e) => handleFilterChange(e.target.value)}
         />
 
         <Button primary type="button" onClick={handleCreate}>
@@ -139,10 +136,18 @@ function Deliveries() {
         <tbody>
           {deliveries.map((d) => (
             <tr key={d.id}>
-              <td>{d.id}</td>
+              <td>#{d.id}</td>
               <td>{d.recipient.name}</td>
               <td>{d.product}</td>
-              <td>{d.deliveryman.name}</td>
+              <td>
+                <AvatarWrapper>
+                  <Avatar
+                    url={d.deliveryman.avatar && d.deliveryman.avatar.url}
+                    name={d.deliveryman.name}
+                  />
+                  {d.deliveryman.name}
+                </AvatarWrapper>
+              </td>
               <td>{d.recipient.city}</td>
               <td>{d.recipient.state}</td>
               <td>
@@ -150,13 +155,9 @@ function Deliveries() {
               </td>
               <td>
                 <Actions
-                  id={d.id}
-                  onShowAction={handleShowAction}
-                  visibleActionId={visibleActionId}
-                  onBlur={() => setVisibleActionId(null)}
-                  onClickShow={() => showDelivery(d.id)}
-                  onClickEdit={() => editDelivery(d.id)}
-                  onClickDelete={() => deleteDelivery(d.id)}
+                  onClickShow={() => handleShow(d.id)}
+                  onClickEdit={() => handleEdit(d.id)}
+                  onClickDelete={() => handleDelete(d.id)}
                 />
               </td>
             </tr>

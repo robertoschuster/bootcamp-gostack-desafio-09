@@ -16,7 +16,7 @@ export const Table = styled.table`
 
   tbody td {
     color: ${colors.textDark};
-    padding: 14px 10px;
+    padding: 10px;
     vertical-align: middle;
     background: ${colors.panelBackground};
   }
