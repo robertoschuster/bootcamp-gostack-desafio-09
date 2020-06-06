@@ -12,7 +12,7 @@ export const Wrapper = styled.div`
 `;
 
 export const Content = styled.div`
-  background: ${colors.panelColor};
+  background: ${colors.panelBackground};
   padding: 50px 20px;
   border-radius: 4px;
   width: 100%;
@@ -31,7 +31,7 @@ export const Content = styled.div`
     label {
       font-size: 14px;
       font-weight: bold;
-      color: ${colors.textDark};
+      color: ${colors.textLight};
       text-align: left;
       padding: 6px 0;
     }
