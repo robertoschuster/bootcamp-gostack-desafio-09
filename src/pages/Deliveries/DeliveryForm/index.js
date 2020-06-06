@@ -185,7 +185,7 @@ function DeliveryForm({ location }) {
           <FieldRowWrapper>
             <FieldWrapper>
               <label htmlFor="product">Produto:</label>
-              <Input name="product" type="text" />
+              <Input name="product" type="text" autoComplete="off" />
             </FieldWrapper>
           </FieldRowWrapper>
         </Form>
