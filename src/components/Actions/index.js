@@ -5,40 +5,49 @@ import { MdRemoveRedEye, MdEdit, MdDeleteForever } from 'react-icons/md';
 import colors from '~/styles/colors';
 import { Container, ActionsButton, ActionsList, Action } from './styles';
 
-function Actions({
-  id,
-  onShowAction,
-  visibleActionId,
-  onClickShow,
-  onClickEdit,
-  onClickDelete,
-}) {
+function Actions({ onClickShow, onClickEdit, onClickDelete }) {
   const [visible, setVisible] = useState(false);
 
-  function handleToggleVisible() {
-    setVisible(!visible);
-    onShowAction(id);
+  function handleAction(action) {
+    switch (action) {
+      case 'show': {
+        onClickShow();
+        break;
+      }
+      case 'edit': {
+        onClickEdit();
+        break;
+      }
+      case 'delete': {
+        onClickDelete();
+        break;
+      }
+      default:
+        break;
+    }
   }
 
   return (
     <Container>
-      <ActionsButton onClick={handleToggleVisible}>...</ActionsButton>
-      <ActionsList visible={visible && visibleActionId === id}>
-        <Action>
-          <button type="button" onClick={onClickShow}>
-            <MdRemoveRedEye size={18} color={colors.iconLight} />
+      <ActionsButton onClick={() => setVisible(!visible)}>...</ActionsButton>
+      <ActionsList visible={visible}>
+        <Action visible={onClickShow}>
+          <button type="button" onClick={() => handleAction('show')}>
+            <MdRemoveRedEye size={18} color={colors.textLight} />
             <span>Visualizar</span>
           </button>
         </Action>
-        <Action>
-          <button type="button" onClick={onClickEdit}>
-            <MdEdit size={18} color={colors.iconLight} />
+
+        <Action visible={onClickEdit}>
+          <button type="button" onClick={() => handleAction('edit')}>
+            <MdEdit size={18} color={colors.textLight} />
             <span>Editar</span>
           </button>
         </Action>
-        <Action>
-          <button type="button" onClick={onClickDelete}>
-            <MdDeleteForever size={18} color={colors.iconLight} />
+
+        <Action visible={onClickDelete}>
+          <button type="button" onClick={() => handleAction('delete')}>
+            <MdDeleteForever size={18} color={colors.textLight} />
             <span>Excluir</span>
           </button>
         </Action>
@@ -48,20 +57,15 @@ function Actions({
 }
 
 Actions.propTypes = {
-  id: PropTypes.number.isRequired,
-  visibleActionId: PropTypes.number,
-  onShowAction: PropTypes.oneOfType([PropTypes.element, PropTypes.func])
-    .isRequired,
-  onClickShow: PropTypes.oneOfType([PropTypes.element, PropTypes.func])
-    .isRequired,
-  onClickEdit: PropTypes.oneOfType([PropTypes.element, PropTypes.func])
-    .isRequired,
-  onClickDelete: PropTypes.oneOfType([PropTypes.element, PropTypes.func])
-    .isRequired,
+  onClickShow: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+  onClickEdit: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+  onClickDelete: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
 };
 
 Actions.defaultProps = {
-  visibleActionId: null,
+  onClickShow: undefined,
+  onClickEdit: undefined,
+  onClickDelete: undefined,
 };
 
 export default Actions;

@@ -44,8 +44,7 @@ export const ActionsList = styled.div`
 `;
 
 export const Action = styled.div`
-  /* background: lightpink; */
-  display: flex;
+  display: ${(props) => (props.visible ? 'flex' : 'none')};
 
   button {
     display: flex;
