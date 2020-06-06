@@ -7,8 +7,15 @@ export const Container = styled.div`
   border-bottom: 1px solid ${colors.panelBorder};
 `;
 
+export const HeaderLink = styled.div`
+  a {
+    font-weight: bold;
+    color: ${(props) => (props.active ? colors.textDarker : colors.neutral)};
+    margin-right: 20px;
+  }
+`;
+
 export const Content = styled.div`
-  /* background: lightsalmon; */
   height: 64px;
   max-width: 1600px;
   margin: 0 auto;
@@ -20,6 +27,7 @@ export const Content = styled.div`
   align-items: center;
 
   nav {
+    /* background: lightcoral; */
     display: flex;
     align-items: center;
 
@@ -28,11 +36,6 @@ export const Content = styled.div`
       margin-right: 20px;
       padding-right: 20px;
       border-right: 1px solid ${colors.panelBorder};
-    }
-
-    a {
-      font-weight: bold;
-      color: ${colors.primary};
     }
   }
 
@@ -63,7 +66,7 @@ export const Profile = styled.div`
       display: block;
       margin-top: 2px;
       font-size: 12px;
-      color: ${colors.textDark};
+      color: red;
     }
   }
 
