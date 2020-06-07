@@ -123,7 +123,7 @@ function Deliveries() {
       <Table>
         <thead>
           <tr>
-            <th>Id</th>
+            <th>ID</th>
             <th>Destinatário</th>
             <th>Encomenda</th>
             <th>Entregador</th>

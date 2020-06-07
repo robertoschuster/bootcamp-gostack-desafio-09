@@ -8,6 +8,9 @@ import DeliveryForm from '../pages/Deliveries/DeliveryForm';
 import DeliverymenList from '../pages/Deliverymen/DeliverymenList';
 import DeliverymenForm from '../pages/Deliverymen/DeliverymenForm';
 
+import RecipientList from '../pages/Recipients/RecipientList';
+import RecipientForm from '../pages/Recipients/RecipientForm';
+
 export default function Routes() {
   return (
     <Switch>
@@ -25,6 +28,13 @@ export default function Routes() {
         path="/deliverymen/create"
         exact
         component={DeliverymenForm}
+        isPrivate
+      />
+      <Route path="/recipients" exact component={RecipientList} isPrivate />
+      <Route
+        path="/recipients/create"
+        exact
+        component={RecipientForm}
         isPrivate
       />
     </Switch>

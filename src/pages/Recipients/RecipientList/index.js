@@ -11,32 +11,33 @@ import { Table } from '~/components/Table';
 import { Title } from '~/components/Title';
 import { Header } from './styles';
 
-import Avatar from '~/components/Avatar';
 import Actions from '~/components/Actions';
 import Pagination from '~/components/Pagination';
 import { Button } from '~/components/Button';
 import SearchInput from '~/components/SearchInput';
 
-function Deliverymen() {
+import getAddress from '~/lib/address';
+
+function Recipients() {
   const [filter, setFilter] = useState('');
-  const [deliverymen, setDeliverymen] = useState([]);
+  const [recipients, setRecipients] = useState([]);
   const time = useRef(null);
   const [totalPages, setTotalPages] = useState(1);
   const [page, setPage] = useState(1);
 
   useEffect(() => {
-    async function loadDeliverymen(f) {
-      const response = await api.get('deliverymen', {
+    async function loadRecipients(f) {
+      const response = await api.get('recipients', {
         params: { q: f, page },
       });
 
       setTotalPages(Number(response.headers['x-api-totalpages']));
-      setDeliverymen(response.data);
+      setRecipients(response.data);
     }
 
     clearTimeout(time.current);
     time.current = setTimeout(() => {
-      loadDeliverymen(filter);
+      loadRecipients(filter);
     }, 600);
   }, [filter, page]);
 
@@ -45,16 +46,15 @@ function Deliverymen() {
   }
 
   function handleCreate() {
-    history.push('/deliverymen/create');
+    history.push('/recipients/create');
   }
 
   function handleEdit(id) {
-    const deliverymenToEdit = deliverymen.find((d) => d.id === id);
-    console.log(deliverymenToEdit);
-    if (deliverymenToEdit) {
+    const recipientToEdit = recipients.find((d) => d.id === id);
+    if (recipientToEdit) {
       history.push({
-        pathname: '/deliverymen/create',
-        deliveryman: deliverymenToEdit,
+        pathname: '/recipients/create',
+        recipient: recipientToEdit,
       });
     }
   }
@@ -66,22 +66,22 @@ function Deliverymen() {
 
     try {
       // Delete on backand
-      await api.delete(`deliverymen/${id}`);
-      setDeliverymen(deliverymen.filter((d) => d.id !== id));
+      await api.delete(`recipients/${id}`);
+      setRecipients(recipients.filter((d) => d.id !== id));
 
-      toast.success('Entregador excluído com sucesso!');
+      toast.success('Destinatário excluído com sucesso!');
     } catch (error) {
-      toast.error('Falha ao excluir entregador!.');
+      toast.error('Falha ao excluir destinatário!.');
     }
   }
 
   return (
     <BaseContainer>
-      <Title>Gerenciando Entregadores</Title>
+      <Title>Gerenciando Destinatários</Title>
 
       <Header>
         <SearchInput
-          placeholder="Buscar por Entregadores"
+          placeholder="Buscar por Destinatários"
           value={filter}
           onChange={(e) => handleFilterChange(e.target.value)}
         />
@@ -97,25 +97,29 @@ function Deliverymen() {
         <thead>
           <tr>
             <th>ID</th>
-            <th>Foto</th>
             <th>Nome</th>
-            <th>E-Mail</th>
+            <th>Endereço</th>
             <th>Ações</th>
           </tr>
         </thead>
         <tbody>
-          {deliverymen.map((d) => (
-            <tr key={d.id}>
-              <td>#{d.id}</td>
+          {recipients.map((item) => (
+            <tr key={item.id}>
+              <td>#{item.id}</td>
+              <td>{item.name}</td>
               <td>
-                <Avatar url={d.avatar && d.avatar.url} name={d.name} />
+                {getAddress(
+                  item.street,
+                  item.number,
+                  item.compl,
+                  item.city,
+                  item.state
+                )}
               </td>
-              <td>{d.name}</td>
-              <td>{d.email}</td>
               <td>
                 <Actions
-                  onClickEdit={() => handleEdit(d.id)}
-                  onClickDelete={() => handleDelete(d.id)}
+                  onClickEdit={() => handleEdit(item.id)}
+                  onClickDelete={() => handleDelete(item.id)}
                 />
               </td>
             </tr>
@@ -127,4 +131,4 @@ function Deliverymen() {
   );
 }
 
-export default Deliverymen;
+export default Recipients;
