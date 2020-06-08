@@ -46,9 +46,7 @@ function Header() {
             </Link>
           </HeaderLink>
           <HeaderLink active={currentRoute === 'problems'}>
-            <Link
-              to="/delivery/problems"
-              onClick={() => setCurrentRoute('problems')}>
+            <Link to="/problems" onClick={() => setCurrentRoute('problems')}>
               PROBLEMAS
             </Link>
           </HeaderLink>

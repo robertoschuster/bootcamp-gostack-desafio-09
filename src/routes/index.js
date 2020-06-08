@@ -7,9 +7,9 @@ import DeliveryList from '../pages/Deliveries/DeliveryList';
 import DeliveryForm from '../pages/Deliveries/DeliveryForm';
 import DeliverymenList from '../pages/Deliverymen/DeliverymenList';
 import DeliverymenForm from '../pages/Deliverymen/DeliverymenForm';
-
 import RecipientList from '../pages/Recipients/RecipientList';
 import RecipientForm from '../pages/Recipients/RecipientForm';
+import ProblemList from '../pages/Problems/ProblemList';
 
 export default function Routes() {
   return (
@@ -37,6 +37,7 @@ export default function Routes() {
         component={RecipientForm}
         isPrivate
       />
+      <Route path="/problems" exact component={ProblemList} isPrivate />
     </Switch>
   );
 }
