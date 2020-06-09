@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { MdAdd } from 'react-icons/md';
+import { MdAdd, MdEdit, MdDeleteForever } from 'react-icons/md';
 import { toast } from 'react-toastify';
 
 import api from '~/services/api';
@@ -117,10 +117,20 @@ function Recipients() {
                 )}
               </td>
               <td>
-                <Actions
-                  onClickEdit={() => handleEdit(item.id)}
-                  onClickDelete={() => handleDelete(item.id)}
-                />
+                <Actions height={90} width={150}>
+                  <li>
+                    <MdEdit color="#4D85EE" size={16} />
+                    <button type="button" onClick={() => handleEdit(item.id)}>
+                      Editar
+                    </button>
+                  </li>
+                  <li>
+                    <MdDeleteForever color="#DE3B3B" size={16} />
+                    <button type="button" onClick={() => handleDelete(item.id)}>
+                      Excluir
+                    </button>
+                  </li>
+                </Actions>
               </td>
             </tr>
           ))}

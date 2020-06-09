@@ -1,81 +1,73 @@
 import styled from 'styled-components';
-import { darken } from 'polished';
-import colors from '~/styles/colors';
+// import colors from '~/styles/colors';
 
 export const Container = styled.div`
-  /* background: lightgreen; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin: 0 !important;
   position: relative;
-  text-align: center;
+
+  button.dots {
+    height: 50px;
+    z-index: 50;
+  }
+
+  button {
+    background: none;
+    border: 0;
+  }
 `;
 
 export const ActionsButton = styled.button`
-  /* background: lightcyan; */
-  border: 0;
-  position: relative;
-  padding: 3px 10px;
-  background: none;
-  font-size: 18px;
-  font-weight: bold;
-  color: ${colors.textDark};
+  height: 50px;
+  z-index: 50;
 `;
 
-export const ActionsList = styled.div`
+export const ActionsContainer = styled.div`
+  background: white;
   position: absolute;
-  width: 160px;
-  left: calc(50% - 80px); /** sempre centralizado no badge */
-  top: calc(100% + 20px);
-  background: ${colors.primary};
+  width: ${({ width }) => width}px;
+  height: ${({ height }) => height}px;
+  left: calc(50% - (${({ width }) => width / 2}px));
+  top: 42px;
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.149);
   border-radius: 4px;
-  padding: 5px;
-  display: ${(props) => (props.visible ? 'block' : 'none')};
-  z-index: ${(props) => (props.visible ? '10' : 'auto')};
+  padding: 0 15px;
+  z-index: 101;
+  display: ${({ visible }) => (visible ? 'block' : 'none')};
+  animation: 0.8s ease-out actionsSmoothEntry;
 
   &::before {
     content: '';
     position: absolute;
-    left: calc(50% - 10px);
-    top: -10px;
+    left: ${({ width }) =>
+      width === 150 ? '55.9%' : width === 200 ? '54.5%' : '58.5%'};
     width: 0;
     height: 0;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-bottom: 10px solid ${colors.primary};
+    box-sizing: border-box;
+    border: 6px solid black;
+    border-color: transparent transparent white white;
+    transform-origin: 0 0;
+    transform: rotate(-225deg);
+    box-shadow: -3px 3px 4px -1px #0000001a;
   }
 `;
 
-export const Action = styled.div`
-  display: ${(props) => (props.visible ? 'flex' : 'none')};
-
-  button {
+export const ActionsList = styled.ul`
+  li {
     display: flex;
-    flex-direction: row;
-    /* justify-content: center; */
+    justify-content: start;
     align-items: center;
-
-    padding: 10px 34px;
-    font-size: 14px;
-    background: none;
-    border: 0;
-    color: ${colors.textLight};
-    flex: 1;
-
-    transition: background 0.2s;
-    &:hover {
-      background: ${darken(0.06, colors.primary)};
-    }
-    &:active {
-      background: ${darken(0.2, colors.primary)};
-    }
+    padding: 15px 20px;
 
     svg {
-      margin-right: 6px;
+      margin-right: 5px;
     }
   }
 
-  /* Toda action seguida por uma action anterior (2ª, 3ª, etc) */
-  & + div {
-    /* margin-top: 15px; */
-    /* padding-top: 15px; */
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
+  li + li {
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
   }
 `;

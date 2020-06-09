@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { MdAdd } from 'react-icons/md';
+import { MdAdd, MdEdit, MdDeleteForever } from 'react-icons/md';
 import { toast } from 'react-toastify';
 
 import api from '~/services/api';
@@ -50,7 +50,6 @@ function Deliverymen() {
 
   function handleEdit(id) {
     const deliverymenToEdit = deliverymen.find((d) => d.id === id);
-    console.log(deliverymenToEdit);
     if (deliverymenToEdit) {
       history.push({
         pathname: '/deliverymen/create',
@@ -113,10 +112,20 @@ function Deliverymen() {
               <td>{d.name}</td>
               <td>{d.email}</td>
               <td>
-                <Actions
-                  onClickEdit={() => handleEdit(d.id)}
-                  onClickDelete={() => handleDelete(d.id)}
-                />
+                <Actions height={90} width={150}>
+                  <li>
+                    <MdEdit color="#4D85EE" size={16} />
+                    <button type="button" onClick={() => handleEdit(d.id)}>
+                      Editar
+                    </button>
+                  </li>
+                  <li>
+                    <MdDeleteForever color="#DE3B3B" size={16} />
+                    <button type="button" onClick={() => handleDelete(d.id)}>
+                      Excluir
+                    </button>
+                  </li>
+                </Actions>
               </td>
             </tr>
           ))}
