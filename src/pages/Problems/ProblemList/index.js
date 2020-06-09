@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from 'react';
+import { MdRemoveRedEye, MdDeleteForever } from 'react-icons/md';
 import { toast } from 'react-toastify';
 
 import api from '~/services/api';
+import colors from '~/styles/colors';
 
 import { BaseContainer } from '~/components/BaseContainer';
 import { Table } from '~/components/Table';
 import { Title } from '~/components/Title';
+import ProblemModal from './ProblemModal';
+import Modal from '~/components/Modal';
+import useModal from '~/components/Modal/useModal';
 
 import Actions from '~/components/Actions';
 import Pagination from '~/components/Pagination';
@@ -14,6 +19,8 @@ function Problems() {
   const [problems, setProblems] = useState([]);
   const [totalPages, setTotalPages] = useState(1);
   const [page, setPage] = useState(1);
+  const { isShowing, toggle } = useModal();
+  const [problem, setProblem] = useState(null);
 
   useEffect(() => {
     async function loadProblems() {
@@ -43,8 +50,20 @@ function Problems() {
     }
   }
 
+  function handleShow(id) {
+    const problemToShow = problems.find((d) => d.id === id);
+    if (problemToShow) {
+      setProblem(problemToShow);
+      toggle();
+    }
+  }
+
   return (
     <BaseContainer>
+      <Modal isShowing={isShowing} hide={toggle}>
+        <ProblemModal problem={problem} />
+      </Modal>
+
       <Title>Problemas na entrega</Title>
 
       <Table>
@@ -61,7 +80,20 @@ function Problems() {
               <td>#{item.delivery_id}</td>
               <td>{item.description}</td>
               <td>
-                <Actions onClickDelete={() => handleDelete(item.id)} />
+                <Actions height={90} width={150}>
+                  <li>
+                    <MdRemoveRedEye color={colors.primary} size={16} />
+                    <button type="button" onClick={() => handleShow(item.id)}>
+                      Visualizar
+                    </button>
+                  </li>
+                  <li>
+                    <MdDeleteForever color="#DE3B3B" size={16} />
+                    <button type="button" onClick={() => handleDelete(item.id)}>
+                      Cancelar encomenda
+                    </button>
+                  </li>
+                </Actions>
               </td>
             </tr>
           ))}
