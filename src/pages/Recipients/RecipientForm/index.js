@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import InputMask from 'react-input-mask';
 
 import PropTypes from 'prop-types';
 import * as Yup from 'yup';
@@ -19,6 +20,9 @@ import { FormWrapper, FieldRowWrapper, FieldWrapper } from './styles';
 
 function RecipientForm({ location }) {
   const [recipient] = useState(location.recipient);
+  const [currentZipCode, setCurrentZipCode] = useState(
+    recipient && recipient.zip_code
+  );
 
   /**
    * Form
@@ -55,16 +59,12 @@ function RecipientForm({ location }) {
     }
   }
 
-  function handleSubmit({
-    name,
-    street,
-    number,
-    compl,
-    city,
-    state,
-    zip_code,
-  }) {
-    save(name, street, number, compl, city, state, zip_code);
+  function handleSubmit({ name, street, number, compl, city, state }) {
+    save(name, street, number, compl, city, state, currentZipCode);
+  }
+
+  function handleZipCodeChange(e) {
+    setCurrentZipCode(e.target.value);
   }
 
   return (
@@ -118,7 +118,16 @@ function RecipientForm({ location }) {
             </FieldWrapper>
             <FieldWrapper>
               <label htmlFor="zip_code">CEP</label>
-              <Input name="zip_code" type="text" autoComplete="off" />
+              {/* <Input name="zip_code" type="text" autoComplete="off" /> */}
+              <InputMask
+                name="zip_code"
+                defaultValue={recipient && recipient.zip_code}
+                autoComplete="off"
+                mask="99999-999"
+                value={currentZipCode}
+                onChange={(e) => handleZipCodeChange(e)}
+              />
+              {/* <InputMask {...this.props} mask="+4\9 99 999 99" maskChar=" " />               */}
             </FieldWrapper>
           </FieldRowWrapper>
         </Form>
